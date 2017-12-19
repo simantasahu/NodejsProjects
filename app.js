@@ -26,7 +26,7 @@ app.get('/', function (req, res) {
         items: todoItems
     });
 });
-aap.post('/add', function (req, res) {
+app.post('/add',function(req,res){
     var newitem = req.body.newitem;
     todoItems.push({
         id: todoItems.length + 1,
