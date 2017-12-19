@@ -1,21 +1,43 @@
 var express = require('express');
 var path = require('path');
-
+var bodyParser = require('body-parser');
 var app = express();
 
 //configure app
 
-app.set('view engine','ejs');
-app.set('views',path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
 
 //use middleware
+
+app.use(bodyParser());
+
+var todoItems = [
+    { id: 1, desc: 'Simanta' },
+    { id: 1, desc: 'Ajit' },
+    { id: 1, desc: 'Amit' }
+];
+
 //define routes
-app.get('/',function(req, res){
+app.get('/', function (req, res) {
     // res.send('hello express!');
-    res.render('index');
+    res.render('index', {
+        title: 'My Title',
+        items: todoItems
+    });
+});
+aap.post('/add', function (req, res) {
+    var newitem = req.body.newitem;
+    todoItems.push({
+        id: todoItems.length + 1,
+        desc: newitem
+    });
+    res.redirect('/');
 });
 
-app.listen(1337,function(){
+
+
+app.listen(1337, function () {
     console.log('ready on port 1337');
 });
 
